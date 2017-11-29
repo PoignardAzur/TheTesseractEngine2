@@ -1,0 +1,13 @@
+material Cube/Stone
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture stone.png
+      }
+    }
+  }
+}

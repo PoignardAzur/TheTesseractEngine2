@@ -1,0 +1,13 @@
+material Cube/Dirt
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture dirt.png
+      }
+    }
+  }
+}
