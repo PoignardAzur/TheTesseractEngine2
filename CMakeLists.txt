@@ -3,7 +3,7 @@ project(OgreTutorialsSample)
 
 # specify which version you need
 find_package(OGRE 1.10 REQUIRED)
-find_package(SFML 2.4 REQUIRED system window)
+find_package(SFML 2.4 REQUIRED system window graphics network audio)
 find_package(Boost REQUIRED COMPONENTS thread)
 
 # the search paths
@@ -19,11 +19,22 @@ file(
 set(SRCS
   src/main.cpp
   src/Inputs.cpp
+  src/GameScene.cpp
+  src/GameWorld.cpp
+  src/GameWorldDisplayer.cpp
+  src/PosRange.cpp
+  src/WorldArea.cpp
+  src/WorldAreaDisplayer.cpp
 )
 set(HDRS
   src/Inputs.hpp
-  src/Scene.hpp
   src/GameScene.hpp
+  src/GameWorld.hpp
+  src/GameWorldDisplayer.hpp
+  src/PosRange.hpp
+  src/Scene.hpp
+  src/WorldArea.hpp
+  src/WorldAreaDisplayer.hpp
 )
 
 include_directories(${Boost_INCLUDE_DIRS})

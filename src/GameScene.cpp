@@ -1,12 +1,32 @@
 
 #include "GameScene.hpp"
 
-GameScene::GameScene()
+// GameScene::GameScene()
+GameScene::GameScene(Ogre::RenderWindow* window)
 {
-  m_world = new GameWorld();
-  // m_world.fillWithStuff;
+  WorldArea area;
+  for (BPos pos : area.getPosRange())
+    area.setBlock(pos, ((pos.x ^ pos.y ^ pos.z) % 2 == 0) ? BlockType::DIRT : BlockType::STONE);
 
-  m_worldDisplayer = new GameWorldDisplayer(*m_world);
+  m_world.reset(new GameWorld(std::move(area)));
+  m_worldDisplayer.reset(new GameWorldDisplayer(*m_world));
+
+  Ogre::SceneManager* scene = m_worldDisplayer->getScene();
+  Ogre::Camera* camera = scene->getCamera("cam");
+
+  camera->setPosition(Ogre::Vector3(260, 260, 260));
+  camera->lookAt(Ogre::Vector3(0, 0, 0));
+  camera->setNearClipDistance(5);
+
+  Ogre::Viewport *viewport = window->addViewport(camera);
+  viewport->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+
+  camera->setAspectRatio(
+    Ogre::Real(viewport->getActualWidth()) /
+    Ogre::Real(viewport->getActualHeight())
+  );
+
+  scene->setAmbientLight(Ogre::ColourValue(1, 1, 1));
 }
 
 void GameScene::gameUpdate(
@@ -16,13 +36,13 @@ void GameScene::gameUpdate(
 )
 {
   auto gameworldEvents = m_world->getUpdateEvents(rng);
-  for (const Event& event : gameworldEvents)
+  for (const GameWorld::Event& event : gameworldEvents)
   {
     m_world->applyEvent(event);
     m_worldDisplayer->applyEvent(event);
   }
 
-  m_player.update(inputState, inputEvents);
+  // m_player.update(inputState, inputEvents);
 }
 
 void GameScene::displayUpdate(
@@ -30,25 +50,18 @@ void GameScene::displayUpdate(
   const Inputs::State& inputState
 )
 {
-  Ogre::SceneManager* scene = m_worldDisplayer->getScene();
-  Ogre::Camera* camera = scene.getCamera("cam");
 
-  camera.setPosition(100, 100, 100);
-  camera.lookAt(0, 0, 0);
+  // camera->setPosition(m_player.getPosition());
+  // camera->setOrientation(m_player.getOrientation());
 
-  /*
-  camera.setPosition(m_player.getPosition());
-  camera.setOrientation(m_player.getOrientation());
-  */
-
-  window.removeAllViewports();
-  window.addViewport(camera);
+  // window->removeAllViewports();
+  // window->addViewport(camera);
 
   // TODO
-  // m_worldDisplayer.update(dt);
+  // m_worldDisplayer->update(dt);
 }
 
-bool isOver()
+bool GameScene::isOver()
 {
   return false;
 }

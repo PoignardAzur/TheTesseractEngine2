@@ -2,8 +2,7 @@
 #ifndef H_WORLD_CHUNK
 #define H_WORLD_CHUNK
 
-#include <SFML/Vector3.hpp>
-
+#include <memory>
 #include <vector>
 
 #include "PosRange.hpp"
@@ -24,8 +23,10 @@ public:
     BPos size = { CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE },
     BlockType fillBlock = BlockType::AIR
   );
-  WorldArea(const WorldArea& other)
-  WorldArea(WorldArea&& other)
+  WorldArea(const WorldArea& other) = default;
+  WorldArea(WorldArea&& other) = default;
+  WorldArea& operator=(const WorldArea& other) = default;
+  WorldArea& operator=(WorldArea&& other) = default;
 
   BlockType getBlock(BPos pos) const;
   BlockType getBlock(long x, long y, long z) const;
@@ -34,6 +35,8 @@ public:
 
   BPos getSize() const;
   PosRange getPosRange() const;
+
+  using Ptr = std::unique_ptr<WorldArea>;
 
 private:
   std::vector<BlockType> m_blockIds;

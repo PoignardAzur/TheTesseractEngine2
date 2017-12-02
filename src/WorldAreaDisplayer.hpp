@@ -2,6 +2,8 @@
 #ifndef H_WORLD_AREA_DISPLAYER
 #define H_WORLD_AREA_DISPLAYER
 
+#include <Ogre.h>
+
 #include <vector>
 #include <map>
 

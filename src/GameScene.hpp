@@ -3,13 +3,17 @@
 #define H_GAME_SCENE
 
 #include <Ogre.h>
+
 #include "Scene.hpp"
-#include "Cameraman.hpp"
+#include "GameWorld.hpp"
+#include "GameWorldDisplayer.hpp"
+// #include "Cameraman.hpp"
 
 class GameScene : public Scene
 {
 public:
-  GameScene();
+  // FIXME - Remove window argument
+  GameScene(Ogre::RenderWindow* window);
 
   void gameUpdate(
     const Inputs::State& inputState,
@@ -26,7 +30,7 @@ public:
 private:
   GameWorld::Ptr m_world;
   GameWorldDisplayer::Ptr m_worldDisplayer;
-  FloatingPlayer m_player;
+  // FloatingPlayer m_player;
 };
 
 #endif // !H_GAME_SCENE

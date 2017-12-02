@@ -7,6 +7,11 @@ _rng(seed)
 {
 }
 
+Inputs::Rng& Inputs::getRng()
+{
+  return _rng;
+}
+
 void Inputs::poll(State& state, Events& events) {
   sf::Event event;
 

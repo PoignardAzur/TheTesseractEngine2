@@ -1,10 +1,13 @@
 
+#include <cassert>
 #include "GameWorldDisplayer.hpp"
 
 GameWorldDisplayer::GameWorldDisplayer(const GameWorld& world)
 {
-  m_sceneManager = new DefaultSceneManager();
-  m_sceneManager.createCamera("cam");
+  m_sceneManager = Ogre::Root::getSingleton().createSceneManager(
+    Ogre::ST_GENERIC, "Scene0"
+  );
+  m_sceneManager->createCamera("cam");
 
   m_blockTypes = {
     { BlockType::STONE, "Cube/Stone" },
@@ -30,7 +33,7 @@ GameWorldDisplayer::GameWorldDisplayer(const GameWorld& world)
   }
 }
 
-void GameWorldDisplayer::applyEvent(const Event& event)
+void GameWorldDisplayer::applyEvent(const GameWorld::Event& event)
 {
   (void)event;
 }

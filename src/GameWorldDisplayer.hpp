@@ -2,17 +2,27 @@
 #ifndef H_GAME_WORLD_DISPLAYER
 #define H_GAME_WORLD_DISPLAYER
 
+#include <Ogre.h>
+
+#include <deque>
+#include <map>
+#include <memory>
+
+#include "GameWorld.hpp"
+#include "WorldAreaDisplayer.hpp"
+
 class GameWorldDisplayer
 {
 public:
   GameWorldDisplayer(const GameWorld& world);
 
-  void applyEvent(const Event& event);
+  void applyEvent(const GameWorld::Event& event);
 
   Ogre::SceneManager* getScene();
 
-private:
+  using Ptr = std::unique_ptr<GameWorldDisplayer>;
 
+private:
   Ogre::SceneManager* m_sceneManager;
   std::map<BlockType, std::string> m_blockTypes;
   std::deque<size_t> m_chunkIds;
