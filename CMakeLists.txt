@@ -58,3 +58,11 @@ include_directories(
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
 add_executable(TTE_2 ${SRCS} ${HDRS})
 target_link_libraries(TTE_2 ${OGRE_LIBRARIES} ${SFML_LIBRARIES})
+
+if(MSVC)
+  target_compile_options(TTE_2 PRIVATE "/W4")
+elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+  target_compile_options(TTE_2 PRIVATE "-Wall")
+  target_compile_options(TTE_2 PRIVATE "-Wextra")
+  target_compile_options(TTE_2 PRIVATE "-Wno-unused-parameter")
+endif()

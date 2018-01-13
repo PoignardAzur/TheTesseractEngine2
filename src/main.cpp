@@ -21,10 +21,9 @@ void _load_resources(
   Ogre::ConfigFile configFile;
   configFile.load(configFileName.c_str());
 
-  auto configIt = configFile.getSectionIterator();
-  while (configIt.hasMoreElements())
+  for (const auto& section : configFile.getSettingsBySection())
   {
-      for (const auto& settings : *configIt.getNext())
+      for (const auto& settings : section.second)
       {
           Ogre::String resourceArchiveType = settings.first;
           Ogre::String resourcePath = settings.second;
@@ -154,19 +153,18 @@ public:
     if (m_scene->isOver())
       return false;
 
-    Inputs::State inputState;
     Inputs::Events inputEvents;
 
-    m_inputs->poll(inputState, inputEvents);
-    inputState.isWindowClosed = inputState.isWindowClosed || m_window->isClosed();
+    m_inputs->poll(m_inputState, inputEvents);
+    m_inputState.isWindowClosed = m_inputState.isWindowClosed || m_window->isClosed();
 
-    if (inputState.isWindowClosed)
+    if (m_inputState.isWindowClosed)
       return false;
-    if (inputState.keysDown[sf::Keyboard::Escape])
+    if (m_inputState.keysDown[sf::Keyboard::Escape])
       return false;
 
-    m_scene->gameUpdate(inputState, inputEvents, m_inputs->getRng());
-    m_scene->displayUpdate(m_window, inputState);
+    m_scene->gameUpdate(m_inputState, inputEvents, m_inputs->getRng());
+    m_scene->displayUpdate(m_window, m_inputState);
 
     return true;
   }
@@ -176,6 +174,8 @@ private:
 
   Inputs* m_inputs;
   Scene* m_scene;
+
+  Inputs::State m_inputState;
 };
 
 int main(int argc, char **argv)
@@ -188,8 +188,8 @@ int main(int argc, char **argv)
     Ogre::Root ogreRoot("plugins.cfg");
 
     _load_resources("resources.cfg", &Ogre::ResourceGroupManager::getSingleton());
-    //if (!mRoot->restoreConfig() && !mRoot->showConfigDialog()))
-    if (!ogreRoot.showConfigDialog())
+    // if (!mRoot->restoreConfig() && !mRoot->showConfigDialog(new Ogre::ConfigDialog)))
+    if (!ogreRoot.showConfigDialog(nullptr))
       return 1;
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
     ogreRoot.initialise(false);

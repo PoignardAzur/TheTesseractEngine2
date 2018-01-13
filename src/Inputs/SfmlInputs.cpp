@@ -75,6 +75,9 @@ void SfmlInputs::poll(State& state, Events& events) {
         state.cursorPosition = newPos;
       }
       break;
+
+      default:
+      break;
     }
   }
 }
