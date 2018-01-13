@@ -2,8 +2,8 @@
 #ifndef H_ENTITY_POS
 #define H_ENTITY_POS
 
-#include <SFML/Graphics.hpp>
+#include <OgreVector3.h>
 
-using EPos = sf::Vector3<float>;
+using EPos = Ogre::Vector3;
 
 #endif // !H_ENTITY_POS

@@ -3,12 +3,15 @@
 
 GameScene::GameScene()
 {
-  WorldArea area;
+  WorldArea area({3, 3, 3});
   for (BPos pos : area.getPosRange())
     area.setBlock(pos, ((pos.x ^ pos.y ^ pos.z) % 2 == 0) ? BlockType::DIRT : BlockType::STONE);
 
   m_world.reset(new GameWorld(std::move(area)));
   m_worldDisplayer.reset(new GameWorldDisplayer(*m_world));
+
+  m_player.setPosition(EPos(26, 26, 26));
+  m_player.lookAt(EPos(0, 0, 0));
 }
 
 void GameScene::gameUpdate(
@@ -23,8 +26,21 @@ void GameScene::gameUpdate(
     m_world->applyEvent(event);
     m_worldDisplayer->applyEvent(event);
   }
+  auto playerEvents = m_player.gameUpdate(inputState, inputEvents, rng);
+  for (const GameWorld::Event& event : playerEvents)
+  {
+    m_world->applyEvent(event);
+    m_worldDisplayer->applyEvent(event);
+  }
+}
 
-  // m_player.update(inputState, inputEvents);
+static Ogre::Vector3 _EPosToOgre(EPos p)
+{
+  return Ogre::Vector3(
+    p.x * BLOCK_SIZE,
+    p.y * BLOCK_SIZE,
+    p.z * BLOCK_SIZE
+  );
 }
 
 void GameScene::displayUpdate(
@@ -32,15 +48,16 @@ void GameScene::displayUpdate(
   const Inputs::State& inputState
 )
 {
+  // TODO
+  // m_worldDisplayer->update(dt);
+
   Ogre::SceneManager* scene = m_worldDisplayer->getScene();
   Ogre::Camera* camera = scene->getCamera("cam");
-
-  camera->setPosition(Ogre::Vector3(260, 260, 260));
-  camera->lookAt(Ogre::Vector3(0, 0, 0));
   camera->setNearClipDistance(5);
 
-  // camera->setPosition(m_player.getPosition());
-  // camera->setOrientation(m_player.getOrientation());
+  //m_player.displayUpdate(dt);
+  camera->setPosition(_EPosToOgre(m_player.getPosition()));
+  camera->setOrientation(m_player.getOrientation());
 
   window->removeAllViewports();
   Ogre::Viewport *viewport = window->addViewport(camera);
@@ -50,9 +67,6 @@ void GameScene::displayUpdate(
     Ogre::Real(viewport->getActualWidth()) /
     Ogre::Real(viewport->getActualHeight())
   );
-
-  // TODO
-  // m_worldDisplayer->update(dt);
 }
 
 bool GameScene::isOver()

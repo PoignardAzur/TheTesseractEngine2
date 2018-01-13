@@ -18,6 +18,7 @@ file(
 
 set(SRCS
   src/main.cpp
+  src/FloatingPlayer.cpp
 
   src/Inputs/SfmlInputs.cpp
   src/Inputs/DummyInputs.cpp
@@ -32,6 +33,8 @@ set(SRCS
   src/Scene/GameScene.cpp
 )
 set(HDRS
+  src/FloatingPlayer.hpp
+
   src/Inputs/Inputs.hpp
   src/Inputs/SfmlInputs.hpp
   src/Inputs/DummyInputs.hpp
@@ -39,6 +42,7 @@ set(HDRS
   src/GameWorld/BlockPos.hpp
   src/GameWorld/BlockType.hpp
   src/GameWorld/EntityPos.hpp
+  src/GameWorld/EntityOrientation.hpp
   src/GameWorld/GameWorld.hpp
   src/GameWorld/PosRange.hpp
   src/GameWorld/WorldArea.hpp

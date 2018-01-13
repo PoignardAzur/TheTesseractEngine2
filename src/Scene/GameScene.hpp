@@ -8,7 +8,7 @@
 
 #include "GameWorld/GameWorld.hpp"
 #include "GameWorldDisplayer/GameWorldDisplayer.hpp"
-// #include "Cameraman.hpp"
+#include "FloatingPlayer.hpp"
 
 class GameScene : public Scene
 {
@@ -30,7 +30,7 @@ public:
 private:
   GameWorld::Ptr m_world;
   GameWorldDisplayer::Ptr m_worldDisplayer;
-  // FloatingPlayer m_player;
+  FloatingPlayer m_player;
 };
 
 #endif // !H_GAME_SCENE
