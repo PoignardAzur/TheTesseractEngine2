@@ -2,15 +2,15 @@
 #ifndef H_INPUTS
 #define H_INPUTS
 
+// TODO - Move to SfmlInputs
 #include <SFML/Graphics.hpp>
+
 #include <array>
 #include <random>
 
 class Inputs
 {
 public:
-  Inputs(sf::Window* window, unsigned seed);
-
   using Rng = std::default_random_engine;
 
   // TODO - enum Action : size_t
@@ -39,14 +39,8 @@ public:
     // sf::Vector2f newWindowSize;
   };
 
-  Rng& getRng();
-  void poll(State& state, Events& events);
-
-private:
-  sf::Window* _window;
-  Rng _rng;
-
-  State _state;
+  virtual Rng& getRng() = 0;
+  virtual void poll(State& state, Events& events) = 0;
 };
 
 #endif // !H_INPUTS

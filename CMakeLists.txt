@@ -18,7 +18,8 @@ file(
 
 set(SRCS
   src/main.cpp
-  src/Inputs.cpp
+  src/SfmlInputs.cpp
+  src/DummyInputs.cpp
   src/GameScene.cpp
   src/GameWorld.cpp
   src/GameWorldDisplayer.cpp
@@ -28,6 +29,8 @@ set(SRCS
 )
 set(HDRS
   src/Inputs.hpp
+  src/SfmlInputs.hpp
+  src/DummyInputs.hpp
   src/GameScene.hpp
   src/GameWorld.hpp
   src/GameWorldDisplayer.hpp

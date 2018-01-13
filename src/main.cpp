@@ -8,7 +8,8 @@
 #include <chrono>
 #include <cassert>
 
-#include "Inputs.hpp"
+#include "SfmlInputs.hpp"
+#include "DummyInputs.hpp"
 #include "GameScene.hpp"
 
 // Not sure if this is a code smell
@@ -211,7 +212,8 @@ int main(int argc, char **argv)
     sf::Window sfmlWindow(windowHandle);
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    Inputs* inputs = new Inputs(&sfmlWindow, seed);
+    Inputs* inputs = new SfmlInputs(&sfmlWindow, seed);
+    // Inputs* inputs = new DummyInputs(seed);
 
     AppFrameListener app(ogreWindow, inputs, scene);
     ogreRoot.addFrameListener(&app);
