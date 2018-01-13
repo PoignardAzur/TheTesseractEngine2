@@ -5,8 +5,9 @@
 #include <Ogre.h>
 
 #include "Scene.hpp"
-#include "GameWorld.hpp"
-#include "GameWorldDisplayer.hpp"
+
+#include "GameWorld/GameWorld.hpp"
+#include "GameWorldDisplayer/GameWorldDisplayer.hpp"
 // #include "Cameraman.hpp"
 
 class GameScene : public Scene

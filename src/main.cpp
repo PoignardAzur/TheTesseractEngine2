@@ -8,9 +8,9 @@
 #include <chrono>
 #include <cassert>
 
-#include "SfmlInputs.hpp"
-#include "DummyInputs.hpp"
-#include "GameScene.hpp"
+#include "Inputs/SfmlInputs.hpp"
+#include "Inputs/DummyInputs.hpp"
+#include "Scene/GameScene.hpp"
 
 // Not sure if this is a code smell
 void _load_resources(

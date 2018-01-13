@@ -2,9 +2,7 @@
 #ifndef H_POS_RANGE
 #define H_POS_RANGE
 
-#include <SFML/Graphics.hpp>
-
-using BPos = sf::Vector3<long>;
+#include "BlockPos.hpp"
 
 // TODO: Unit tests
 

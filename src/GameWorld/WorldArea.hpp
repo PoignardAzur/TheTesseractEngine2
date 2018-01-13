@@ -5,16 +5,11 @@
 #include <memory>
 #include <vector>
 
+#include "BlockType.hpp"
+#include "BlockPos.hpp"
 #include "PosRange.hpp"
 
 constexpr long CHUNK_SIZE = 16;
-
-enum class BlockType
-{
-    AIR = 0,
-    DIRT,
-    STONE
-};
 
 class WorldArea
 {

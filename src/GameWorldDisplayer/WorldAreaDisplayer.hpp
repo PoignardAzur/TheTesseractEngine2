@@ -7,7 +7,7 @@
 #include <vector>
 #include <map>
 
-#include "WorldArea.hpp"
+#include "GameWorld/WorldArea.hpp"
 
 constexpr size_t BLOCK_SIZE = 10;
 

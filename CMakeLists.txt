@@ -18,29 +18,42 @@ file(
 
 set(SRCS
   src/main.cpp
-  src/SfmlInputs.cpp
-  src/DummyInputs.cpp
-  src/GameScene.cpp
-  src/GameWorld.cpp
-  src/GameWorldDisplayer.cpp
-  src/PosRange.cpp
-  src/WorldArea.cpp
-  src/WorldAreaDisplayer.cpp
+
+  src/Inputs/SfmlInputs.cpp
+  src/Inputs/DummyInputs.cpp
+
+  src/GameWorld/GameWorld.cpp
+  src/GameWorld/PosRange.cpp
+  src/GameWorld/WorldArea.cpp
+
+  src/GameWorldDisplayer/GameWorldDisplayer.cpp
+  src/GameWorldDisplayer/WorldAreaDisplayer.cpp
+
+  src/Scene/GameScene.cpp
 )
 set(HDRS
-  src/Inputs.hpp
-  src/SfmlInputs.hpp
-  src/DummyInputs.hpp
-  src/GameScene.hpp
-  src/GameWorld.hpp
-  src/GameWorldDisplayer.hpp
-  src/PosRange.hpp
-  src/Scene.hpp
-  src/WorldArea.hpp
-  src/WorldAreaDisplayer.hpp
+  src/Inputs/Inputs.hpp
+  src/Inputs/SfmlInputs.hpp
+  src/Inputs/DummyInputs.hpp
+
+  src/GameWorld/BlockPos.hpp
+  src/GameWorld/BlockType.hpp
+  src/GameWorld/EntityPos.hpp
+  src/GameWorld/GameWorld.hpp
+  src/GameWorld/PosRange.hpp
+  src/GameWorld/WorldArea.hpp
+
+  src/GameWorldDisplayer/GameWorldDisplayer.hpp
+  src/GameWorldDisplayer/WorldAreaDisplayer.hpp
+
+  src/Scene/Scene.hpp
+  src/Scene/GameScene.hpp
 )
 
-include_directories(${Boost_INCLUDE_DIRS})
+include_directories(
+  ${Boost_INCLUDE_DIRS},
+  src
+)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
 add_executable(TTE_2 ${SRCS} ${HDRS})

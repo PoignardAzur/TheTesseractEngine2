@@ -6,7 +6,7 @@
 #include <map>
 #include <memory>
 
-#include "Inputs.hpp"
+#include "Inputs/Inputs.hpp"
 #include "WorldArea.hpp"
 
 class GameWorld

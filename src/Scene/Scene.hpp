@@ -3,7 +3,7 @@
 #define H_SCENE
 
 #include <Ogre.h>
-#include "Inputs.hpp"
+#include "Inputs/Inputs.hpp"
 
 class Scene
 {

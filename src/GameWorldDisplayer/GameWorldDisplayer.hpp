@@ -8,7 +8,7 @@
 #include <map>
 #include <memory>
 
-#include "GameWorld.hpp"
+#include "GameWorld/GameWorld.hpp"
 #include "WorldAreaDisplayer.hpp"
 
 class GameWorldDisplayer
