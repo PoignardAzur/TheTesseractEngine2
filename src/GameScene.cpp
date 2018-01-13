@@ -1,8 +1,7 @@
 
 #include "GameScene.hpp"
 
-// GameScene::GameScene()
-GameScene::GameScene(Ogre::RenderWindow* window)
+GameScene::GameScene()
 {
   WorldArea area;
   for (BPos pos : area.getPosRange())
@@ -10,23 +9,6 @@ GameScene::GameScene(Ogre::RenderWindow* window)
 
   m_world.reset(new GameWorld(std::move(area)));
   m_worldDisplayer.reset(new GameWorldDisplayer(*m_world));
-
-  Ogre::SceneManager* scene = m_worldDisplayer->getScene();
-  Ogre::Camera* camera = scene->getCamera("cam");
-
-  camera->setPosition(Ogre::Vector3(260, 260, 260));
-  camera->lookAt(Ogre::Vector3(0, 0, 0));
-  camera->setNearClipDistance(5);
-
-  Ogre::Viewport *viewport = window->addViewport(camera);
-  viewport->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
-
-  camera->setAspectRatio(
-    Ogre::Real(viewport->getActualWidth()) /
-    Ogre::Real(viewport->getActualHeight())
-  );
-
-  scene->setAmbientLight(Ogre::ColourValue(1, 1, 1));
 }
 
 void GameScene::gameUpdate(
@@ -50,12 +32,24 @@ void GameScene::displayUpdate(
   const Inputs::State& inputState
 )
 {
+  Ogre::SceneManager* scene = m_worldDisplayer->getScene();
+  Ogre::Camera* camera = scene->getCamera("cam");
+
+  camera->setPosition(Ogre::Vector3(260, 260, 260));
+  camera->lookAt(Ogre::Vector3(0, 0, 0));
+  camera->setNearClipDistance(5);
 
   // camera->setPosition(m_player.getPosition());
   // camera->setOrientation(m_player.getOrientation());
 
-  // window->removeAllViewports();
-  // window->addViewport(camera);
+  window->removeAllViewports();
+  Ogre::Viewport *viewport = window->addViewport(camera);
+  viewport->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+
+  camera->setAspectRatio(
+    Ogre::Real(viewport->getActualWidth()) /
+    Ogre::Real(viewport->getActualHeight())
+  );
 
   // TODO
   // m_worldDisplayer->update(dt);

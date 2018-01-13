@@ -4,10 +4,9 @@
 
 GameWorldDisplayer::GameWorldDisplayer(const GameWorld& world)
 {
-  m_sceneManager = Ogre::Root::getSingleton().createSceneManager(
-    Ogre::ST_GENERIC, "Scene0"
-  );
+  m_sceneManager = new Ogre::DefaultSceneManager("Scene0");
   m_sceneManager->createCamera("cam");
+  m_sceneManager->setAmbientLight(Ogre::ColourValue(1, 1, 1));
 
   m_blockTypes = {
     { BlockType::STONE, "Cube/Stone" },

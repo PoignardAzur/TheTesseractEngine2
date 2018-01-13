@@ -199,8 +199,9 @@ int main(int argc, char **argv)
 
     _createCubeMesh();
 
-    Scene* scene = new GameScene(ogreWindow);
+    Scene* scene = new GameScene();
     // FIXME - Hack to stop Ogre from interfering with SFML
+    scene->displayUpdate(ogreWindow, Inputs::State());
     ogreRoot.renderOneFrame();
 
     // sfmlWindow points to the same window as ogreWindow

@@ -12,8 +12,7 @@
 class GameScene : public Scene
 {
 public:
-  // FIXME - Remove window argument
-  GameScene(Ogre::RenderWindow* window);
+  GameScene();
 
   void gameUpdate(
     const Inputs::State& inputState,
