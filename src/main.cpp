@@ -156,7 +156,6 @@ public:
     Inputs::Events inputEvents;
 
     m_inputs->poll(m_inputState, inputEvents);
-    m_inputState.isWindowClosed = m_inputState.isWindowClosed || m_window->isClosed();
 
     if (m_inputState.isWindowClosed)
       return false;
@@ -194,22 +193,31 @@ int main(int argc, char **argv)
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
     ogreRoot.initialise(false);
 
+    sf::ContextSettings settings;
+    settings.depthBits = 32;
+    sf::Window sfmlWindow(
+      sf::VideoMode(800, 600),
+      "Ogre3D v1.10 and SFML v2.4.2",
+      sf::Style::Default,
+      settings
+    );
+
+    sfmlWindow.setFramerateLimit(30);
+    sfmlWindow.setMouseCursorGrabbed(true);
+
+    Ogre::NameValuePairList params = {
+      { "externalGLControl", "true" },
+      { "currentGLContext", "true" }
+    };
+    // sfmlWindow points to the same window as ogreWindow
+    // ogreWindow is used for displaying things, sfmlWindow for events
     Ogre::RenderWindow* ogreWindow = ogreRoot.createRenderWindow(
-      "Ogre3D v1.10 and SFML v2.4.2", 800, 600, false
+      "FAKENAME", 42, 42, false, &params
     );
 
     _createCubeMesh();
 
     Scene* scene = new GameScene();
-    // FIXME - Hack to stop Ogre from interfering with SFML
-    scene->displayUpdate(ogreWindow, Inputs::State());
-    ogreRoot.renderOneFrame();
-
-    // sfmlWindow points to the same window as ogreWindow
-    // ogreWindow is used for displaying things, sfmlWindow for events
-    int windowHandle;
-    ogreWindow->getCustomAttribute("WINDOW", &windowHandle);
-    sf::Window sfmlWindow(windowHandle);
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     Inputs* inputs = new SfmlInputs(&sfmlWindow, seed);
@@ -220,10 +228,9 @@ int main(int argc, char **argv)
 
     while (true)
     {
-      // Most events are handled through SFML, except for isWindowClosed
-      Ogre::WindowEventUtilities::messagePump();
       if (!ogreRoot.renderOneFrame())
         break;
+      sfmlWindow.display();
     }
   }
   catch (const std::exception& e)
