@@ -56,11 +56,30 @@ std::deque<GameWorld::Event> FloatingPlayer::gameUpdate(
   Inputs::Rng& rng
 )
 {
-  // TODO
-  yaw(Ogre::Degree(-inputEvents.cursorMovement.x * 0.015f));
-  pitch(Ogre::Degree(-inputEvents.cursorMovement.y * 0.015f));
-
   (void)rng;
+
+  float sensitivity = 0.06f;
+  float speed = 1.0f;
+
+  yaw(Ogre::Degree(-inputEvents.cursorMovement.x * sensitivity));
+  pitch(Ogre::Degree(-inputEvents.cursorMovement.y * sensitivity));
+
+  Ogre::Vector3 dir = m_orient * -Ogre::Vector3::UNIT_Z;
+  Ogre::Vector3 forward = Ogre::Vector3(dir.x, 0, dir.z).normalisedCopy();
+  Ogre::Vector3 right = m_orient * Ogre::Vector3::UNIT_X;
+
+  Ogre::Vector3 dpos(0.f);
+
+  if (inputState.keysDown[sf::Keyboard::Z])
+    dpos += speed * forward;
+  if (inputState.keysDown[sf::Keyboard::Q])
+    dpos -= speed * right;
+  if (inputState.keysDown[sf::Keyboard::S])
+    dpos -= speed * forward;
+  if (inputState.keysDown[sf::Keyboard::D])
+    dpos += speed * right;
+
+  m_pos += dpos;
 
   return {};
 }
