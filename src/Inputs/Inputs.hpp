@@ -20,7 +20,10 @@ public:
     std::array<bool, sf::Keyboard::KeyCount> keysDown = {};
     std::array<bool, sf::Mouse::ButtonCount> mouseButtonsDown = {};
     sf::Vector2f cursorPosition;
-    bool isWindowClosed = false;
+
+    bool windowClosed = false;
+    sf::Vector2u windowSize;
+    bool windowHasFocus = false;
   };
 
   struct Events
@@ -34,13 +37,15 @@ public:
 
     bool mouseMoved = false;
     sf::Vector2f cursorMovement;
-    // TODO
-    // bool windowResized = false;
-    // sf::Vector2f newWindowSize;
+
+    bool windowResized = false;
+    bool windowLostFocus = false;
+    bool windowGainedFocus = false;
   };
 
   virtual Rng& getRng() = 0;
-  virtual void poll(State& state, Events& events) = 0;
+  virtual void wait(State& state, Events& events, bool centerMouse) = 0;
+  virtual void poll(State& state, Events& events, bool centerMouse) = 0;
 };
 
 #endif // !H_INPUTS

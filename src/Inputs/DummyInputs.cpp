@@ -11,7 +11,14 @@ Inputs::Rng& DummyInputs::getRng()
   return _rng;
 }
 
-void DummyInputs::poll(State& state, Events& events) {
+void DummyInputs::wait(State& state, Events& events, bool centerMouse) {
   (void)state;
   (void)events;
+  (void)centerMouse;
+}
+
+void DummyInputs::poll(State& state, Events& events, bool centerMouse) {
+  (void)state;
+  (void)events;
+  (void)centerMouse;
 }

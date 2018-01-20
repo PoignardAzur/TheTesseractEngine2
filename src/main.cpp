@@ -155,9 +155,9 @@ public:
 
     Inputs::Events inputEvents;
 
-    m_inputs->poll(m_inputState, inputEvents);
+    m_inputs->poll(m_inputState, inputEvents, true);
 
-    if (m_inputState.isWindowClosed)
+    if (m_inputState.windowClosed)
       return false;
     if (m_inputState.keysDown[sf::Keyboard::Escape])
       return false;
@@ -204,6 +204,7 @@ int main(int argc, char **argv)
 
     sfmlWindow.setFramerateLimit(30);
     sfmlWindow.setMouseCursorGrabbed(true);
+    sfmlWindow.setMouseCursorVisible(true);
 
     Ogre::NameValuePairList params = {
       { "externalGLControl", "true" },

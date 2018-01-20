@@ -11,7 +11,8 @@ public:
   DummyInputs(unsigned seed);
 
   Rng& getRng();
-  void poll(State& state, Events& events);
+  void wait(State& state, Events& events, bool centerMouse);
+  void poll(State& state, Events& events, bool centerMouse);
 
 private:
   Rng _rng;
