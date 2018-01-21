@@ -23,8 +23,8 @@ set(SRCS
   src/Inputs/SfmlInputs.cpp
   src/Inputs/DummyInputs.cpp
 
-  src/GameWorld/GameWorld.cpp
   src/GameWorld/PosRange.cpp
+  src/GameWorld/SingleChunk.cpp
   src/GameWorld/WorldArea.cpp
 
   src/GameWorldDisplayer/GameWorldDisplayer.cpp
@@ -45,6 +45,7 @@ set(HDRS
   src/GameWorld/EntityOrientation.hpp
   src/GameWorld/GameWorld.hpp
   src/GameWorld/PosRange.hpp
+  src/GameWorld/SingleChunk.hpp
   src/GameWorld/WorldArea.hpp
 
   src/GameWorldDisplayer/GameWorldDisplayer.hpp
