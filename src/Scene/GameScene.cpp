@@ -27,7 +27,7 @@ void GameScene::gameUpdate(
     m_world->applyEvent(event);
     m_worldDisplayer->applyEvent(event);
   }
-  auto playerEvents = m_player.gameUpdate(inputState, inputEvents, rng);
+  auto playerEvents = m_player.gameUpdate(*m_world, inputState, inputEvents, rng);
   for (const GameWorld::Event& event : playerEvents)
   {
     m_world->applyEvent(event);

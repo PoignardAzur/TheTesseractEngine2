@@ -4,6 +4,7 @@
 
 #include <deque>
 #include <memory>
+#include <optional>
 
 #include "Inputs/Inputs.hpp"
 #include "WorldChunk.hpp"
@@ -31,7 +32,15 @@ public:
 
   struct Hitscan
   {
+    std::optional<BPos> blockTarget_break;
+    std::optional<BPos> blockTarget_place;
+    // Entity* entityTarget = nullptr;
+  };
 
+  struct AreaSlice
+  {
+    PosRange posRange;
+    size_t chunkId;
   };
 
   using Ptr = std::unique_ptr<GameWorld>;
@@ -40,6 +49,7 @@ public:
   virtual void applyEvent(const Event& event) = 0;
 
   virtual bool isAreaAvailable(const PosRange& area) const = 0;
+  virtual std::deque<AreaSlice> sliceArea(const PosRange& area) const = 0;
   virtual Hitscan getHitscan(
     EPos pos, EOrient dir,
     float minDistance, float maxDistance, bool floatingBlock

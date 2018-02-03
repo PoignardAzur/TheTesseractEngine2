@@ -19,6 +19,7 @@ public:
   void rotate(const Ogre::Quaternion& q);
 
   std::deque<GameWorld::Event> gameUpdate(
+    const GameWorld& world,
     const Inputs::State& inputState,
     const Inputs::Events& inputEvents,
     Inputs::Rng& rng

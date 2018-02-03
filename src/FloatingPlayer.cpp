@@ -51,6 +51,7 @@ void FloatingPlayer::rotate(const Ogre::Quaternion& q)
 }
 
 std::deque<GameWorld::Event> FloatingPlayer::gameUpdate(
+  const GameWorld& world,
   const Inputs::State& inputState,
   const Inputs::Events& inputEvents,
   Inputs::Rng& rng
@@ -78,8 +79,37 @@ std::deque<GameWorld::Event> FloatingPlayer::gameUpdate(
     dpos -= speed * forward;
   if (inputState.keysDown[sf::Keyboard::D])
     dpos += speed * right;
+  if (inputState.keysDown[sf::Keyboard::Space])
+    dpos += speed * Ogre::Vector3::UNIT_Y;
+  if (inputState.keysDown[sf::Keyboard::C])
+    dpos -= speed * Ogre::Vector3::UNIT_Y;
 
   m_pos += dpos;
+
+  if (inputEvents.mouseButtonsFirstPressed[sf::Mouse::Left])
+  {
+    auto hitscan = world.getHitscan(m_pos, m_orient, 0.0f, 10.0f, false);
+    if (hitscan.blockTarget_break)
+    {
+      GameWorld::Event event;
+      event.type = GameWorld::RemoveBlock;
+      event.blockPos = *hitscan.blockTarget_break;
+      return { event };
+    }
+  }
+
+  if (inputEvents.mouseButtonsFirstPressed[sf::Mouse::Right])
+  {
+    auto hitscan = world.getHitscan(m_pos, m_orient, 0.0f, 10.0f, false);
+    if (hitscan.blockTarget_place)
+    {
+      GameWorld::Event event;
+      event.type = GameWorld::SetBlock;
+      event.blockPos = *hitscan.blockTarget_place;
+      event.blockType = BlockType::STONE;
+      return { event };
+    }
+  }
 
   return {};
 }
