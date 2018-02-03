@@ -41,83 +41,83 @@ void _createCubeMesh()
 
   cube.begin("Cube/Dirt");
 
-  cube.position(0.5, -0.5, 1.0);
+  cube.position(1.0, 0.0, 1.0);
   cube.normal(0.408248, -0.816497, 0.408248);
   cube.textureCoord(1, 0);
 
-  cube.position(-0.5, -0.5, 0.0);
+  cube.position(0.0, 0.0, 0.0);
   cube.normal(-0.408248, -0.816497, -0.408248);
   cube.textureCoord(0, 1);
 
-  cube.position(0.5, -0.5, 0.0);
+  cube.position(1.0, 0.0, 0.0);
   cube.normal(0.666667, -0.333333, -0.666667);
   cube.textureCoord(1, 1);
 
-  cube.position(-0.5, -0.5, 1.0);
+  cube.position(0.0, 0.0, 1.0);
   cube.normal(-0.666667, -0.333333, 0.666667);
   cube.textureCoord(0, 0);
 
-  cube.position(0.5, 0.5, 1.0);
+  cube.position(1.0, 1.0, 1.0);
   cube.normal(0.666667, 0.333333, 0.666667);
   cube.textureCoord(1, 0);
 
-  cube.position(-0.5, -0.5, 1.0);
+  cube.position(0.0, 0.0, 1.0);
   cube.normal(-0.666667, -0.333333, 0.666667);
   cube.textureCoord(0, 1);
 
-  cube.position(0.5, -0.5, 1.0);
+  cube.position(1.0, 0.0, 1.0);
   cube.normal(0.408248, -0.816497, 0.408248);
   cube.textureCoord(1, 1);
 
-  cube.position(-0.5, 0.5, 1.0);
+  cube.position(0.0, 1.0, 1.0);
   cube.normal(-0.408248, 0.816497, 0.408248);
   cube.textureCoord(0, 0);
 
-  cube.position(-0.5, 0.5, 0.0);
+  cube.position(0.0, 1.0, 0.0);
   cube.normal(-0.666667, 0.333333, -0.666667);
   cube.textureCoord(0, 1);
 
-  cube.position(-0.5, -0.5, 0.0);
+  cube.position(0.0, 0.0, 0.0);
   cube.normal(-0.408248, -0.816497, -0.408248);
   cube.textureCoord(1, 1);
 
-  cube.position(-0.5, -0.5, 1.0);
+  cube.position(0.0, 0.0, 1.0);
   cube.normal(-0.666667, -0.333333, 0.666667);
   cube.textureCoord(1, 0);
 
-  cube.position(0.5, -0.5, 0.0);
+  cube.position(1.0, 0.0, 0.0);
   cube.normal(0.666667, -0.333333, -0.666667);
   cube.textureCoord(0, 1);
 
-  cube.position(0.5, 0.5, 0.0);
+  cube.position(1.0, 1.0, 0.0);
   cube.normal(0.408248, 0.816497, -0.408248);
   cube.textureCoord(1, 1);
 
-  cube.position(0.5, -0.5, 1.0);
+  cube.position(1.0, 0.0, 1.0);
   cube.normal(0.408248, -0.816497, 0.408248);
   cube.textureCoord(0, 0);
 
-  cube.position(0.5, -0.5, 0.0);
+  cube.position(1.0, 0.0, 0.0);
   cube.normal(0.666667, -0.333333, -0.666667);
   cube.textureCoord(1, 0);
 
-  cube.position(-0.5, -0.5, 0.0);
+  cube.position(0.0, 0.0, 0.0);
   cube.normal(-0.408248, -0.816497, -0.408248);
   cube.textureCoord(0, 0);
 
-  cube.position(-0.5, 0.5, 1.0);
+  cube.position(0.0, 1.0, 1.0);
   cube.normal(-0.408248, 0.816497, 0.408248);
   cube.textureCoord(1, 0);
 
-  cube.position(0.5, 0.5, 0.0);
+  cube.position(1.0, 1.0, 0.0);
   cube.normal(0.408248, 0.816497, -0.408248);
   cube.textureCoord(0, 1);
 
-  cube.position(-0.5, 0.5, 0.0);
+  cube.position(0.0, 1.0, 0.0);
   cube.normal(-0.666667, 0.333333, -0.666667);
   cube.textureCoord(1, 1);
 
-  cube.position(0.5, 0.5, 1.0);
+  cube.position(1.0, 1.0, 1.0);
   cube.normal(0.666667, 0.333333, 0.666667);
   cube.textureCoord(0, 0);
 

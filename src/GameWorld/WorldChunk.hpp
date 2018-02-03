@@ -11,17 +11,17 @@
 
 constexpr long CHUNK_SIZE = 16;
 
-class WorldArea
+class WorldChunk
 {
 public:
-  WorldArea(
+  WorldChunk(
     BPos size = { CHUNK_SIZE, CHUNK_SIZE, CHUNK_SIZE },
     BlockType fillBlock = BlockType::AIR
   );
-  WorldArea(const WorldArea& other) = default;
-  WorldArea(WorldArea&& other) = default;
-  WorldArea& operator=(const WorldArea& other) = default;
-  WorldArea& operator=(WorldArea&& other) = default;
+  WorldChunk(const WorldChunk& other) = default;
+  WorldChunk(WorldChunk&& other);
+  WorldChunk& operator=(const WorldChunk& other) = default;
+  WorldChunk& operator=(WorldChunk&& other);
 
   BlockType getBlock(BPos pos) const;
   BlockType getBlock(long x, long y, long z) const;
@@ -31,7 +31,7 @@ public:
   BPos getSize() const;
   PosRange getPosRange() const;
 
-  using Ptr = std::unique_ptr<WorldArea>;
+  using Ptr = std::unique_ptr<WorldChunk>;
 
 private:
   std::vector<BlockType> m_blockIds;

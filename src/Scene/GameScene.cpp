@@ -4,14 +4,14 @@
 
 GameScene::GameScene()
 {
-  WorldArea area({3, 3, 3});
-  for (BPos pos : area.getPosRange())
-    area.setBlock(pos, ((pos.x ^ pos.y ^ pos.z) % 2 == 0) ? BlockType::DIRT : BlockType::STONE);
+  WorldChunk chunk({5, 5, 5});
+  for (BPos pos : chunk.getPosRange())
+    chunk.setBlock(pos, ((pos.x ^ pos.y ^ pos.z) % 2 == 0) ? BlockType::DIRT : BlockType::STONE);
 
-  m_world.reset(new SingleChunk(std::move(area)));
-  m_worldDisplayer.reset(new GameWorldDisplayer(*m_world));
+  m_world.reset(new SingleChunk(std::move(chunk)));
+  m_worldDisplayer.reset(new GameWorldDisplayer(m_world.get()));
 
-  m_player.setPosition(EPos(26, 26, 26));
+  m_player.setPosition(EPos(10, 10, 10));
   m_player.lookAt(EPos(0, 0, 0));
 }
 

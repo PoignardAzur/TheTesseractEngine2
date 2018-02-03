@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "Inputs/Inputs.hpp"
-#include "WorldArea.hpp"
+#include "WorldChunk.hpp"
 
 #include "EntityPos.hpp"
 #include "EntityOrientation.hpp"
@@ -25,6 +25,7 @@ public:
   {
     EventType type;
     BPos blockPos;
+    BPos blockPos2;
     BlockType blockType;
   };
 
@@ -38,14 +39,14 @@ public:
   virtual std::deque<Event> getUpdateEvents(Inputs::Rng& rng) const = 0;
   virtual void applyEvent(const Event& event) = 0;
 
-  virtual bool isAreaAvailable(BPos from, BPos to) = 0;
+  virtual bool isAreaAvailable(const PosRange& area) const = 0;
   virtual Hitscan getHitscan(
     EPos pos, EOrient dir,
     float minDistance, float maxDistance, bool floatingBlock
-  ) = 0;
+  ) const = 0;
 
   virtual std::deque<size_t> getChunkIds() const = 0;
-  virtual const WorldArea& getChunk(size_t id) const = 0;
+  virtual const WorldChunk& getChunk(size_t id) const = 0;
   virtual BPos getChunkPos(size_t id) const = 0;
 
   // TODO - save

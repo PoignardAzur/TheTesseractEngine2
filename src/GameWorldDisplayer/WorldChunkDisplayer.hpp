@@ -7,17 +7,17 @@
 #include <vector>
 #include <map>
 
-#include "GameWorld/WorldArea.hpp"
+#include "GameWorld/WorldChunk.hpp"
 
 constexpr size_t BLOCK_SIZE = 10;
 
-class WorldAreaDisplayer
+class WorldChunkDisplayer
 {
 public:
-  WorldAreaDisplayer(
+  WorldChunkDisplayer(
     Ogre::SceneNode* rootNode,
     const std::map<BlockType, std::string>* blockTypes,
-    const WorldArea& area,
+    const WorldChunk& chunk,
     Ogre::SceneManager* sceneManager
   );
 

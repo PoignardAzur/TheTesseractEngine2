@@ -25,10 +25,10 @@ set(SRCS
 
   src/GameWorld/PosRange.cpp
   src/GameWorld/SingleChunk.cpp
-  src/GameWorld/WorldArea.cpp
+  src/GameWorld/WorldChunk.cpp
 
   src/GameWorldDisplayer/GameWorldDisplayer.cpp
-  src/GameWorldDisplayer/WorldAreaDisplayer.cpp
+  src/GameWorldDisplayer/WorldChunkDisplayer.cpp
 
   src/Scene/GameScene.cpp
 )
@@ -46,10 +46,10 @@ set(HDRS
   src/GameWorld/GameWorld.hpp
   src/GameWorld/PosRange.hpp
   src/GameWorld/SingleChunk.hpp
-  src/GameWorld/WorldArea.hpp
+  src/GameWorld/WorldChunk.hpp
 
   src/GameWorldDisplayer/GameWorldDisplayer.hpp
-  src/GameWorldDisplayer/WorldAreaDisplayer.hpp
+  src/GameWorldDisplayer/WorldChunkDisplayer.hpp
 
   src/Scene/Scene.hpp
   src/Scene/GameScene.hpp
