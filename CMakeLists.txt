@@ -17,7 +17,6 @@ file(
 )
 
 set(SRCS
-  src/main.cpp
   src/FloatingPlayer.cpp
 
   src/Inputs/SfmlInputs.cpp
@@ -55,13 +54,31 @@ set(HDRS
   src/Scene/GameScene.hpp
 )
 
+set(TESTS
+  tests/tests-main.cpp
+
+  tests/GameWorld/tests-PosRange.cpp
+  tests/GameWorld/tests-SingleChunk.cpp
+  tests/GameWorld/tests-WorldChunk.cpp
+)
+
 include_directories(
   ${Boost_INCLUDE_DIRS},
+  tests,
   src
 )
 
+
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
-add_executable(TTE_2 ${SRCS} ${HDRS})
+
+add_executable(TTE_2_tests ${SRCS} ${TESTS} ${HDRS} tests/catch.hpp)
+target_link_libraries(TTE_2_tests ${OGRE_LIBRARIES} ${SFML_LIBRARIES})
+
+set_property(TARGET TTE_2_tests PROPERTY CXX_STANDARD_REQUIRED true)
+set_property(TARGET TTE_2_tests PROPERTY CXX_STANDARD 17)
+
+
+add_executable(TTE_2 ${SRCS} ${HDRS} src/main.cpp)
 target_link_libraries(TTE_2 ${OGRE_LIBRARIES} ${SFML_LIBRARIES})
 
 set_property(TARGET TTE_2 PROPERTY CXX_STANDARD_REQUIRED true)
